@@ -6,7 +6,73 @@
   <link rel="icon" href="https://example.com/path/to/your/icon.png" type="image/png"> <!-- Replace with your icon link -->
   <title>Moontech - Psx</title>
   <style>
-    /* Your styling here */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    label {
+      font-size: 14px;
+      color: #555;
+    }
+
+    input[type="text"], input[type="url"], textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    textarea {
+      height: 150px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .embed {
+      background-color: #eef;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+
+    #status {
+      color: #4CAF50;
+      font-size: 14px;
+      margin-top: 15px;
+    }
   </style>
 </head>
 <body>
@@ -52,7 +118,7 @@
 
         // Send to Pastebin
         const pasteData = {
-          api_dev_key: 'CuOOgowqB0lzOqW6W_BTWWsv3HH0kW54', // Replace with your API key
+          api_dev_key: 'fw1TP2aocJeX4p3DnYmXs23OiKS4LdTu', // Replace with your API key
           api_option: 'paste',
           api_paste_code: scriptContent,
           api_paste_private: '1', // 0=public, 1=unlisted, 2=private
