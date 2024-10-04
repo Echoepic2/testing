@@ -1,74 +1,64 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Script Generator</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
-      margin: 0;
-      padding: 20px;
-    }
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-    form {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-      background: #fff;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    label, input {
-      display: block;
-      width: 100%;
-      margin-bottom: 10px;
-    }
-    input[type="text"], input[type="url"] {
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
-    button {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      background-color: #333;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #555;
-    }
-    #status {
-      text-align: center;
-      margin-top: 20px;
-      color: red;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Script Generator</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Add your styles.css if needed -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+
+        input[type="text"], input[type="url"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px 0;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #output {
+            width: 80%;
+            height: 100px;
+            margin-top: 20px;
+            padding: 10px;
+            font-family: monospace;
+        }
+    </style>
 </head>
 <body>
 
-  <h1>Script Generator</h1>
-
-  <form id="generateForm">
+    <h1>Webbased Generate Script</h1>
     <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
+    <input type="text" id="username" name="username" required><br>
 
     <label for="webhook">Webhook:</label>
-    <input type="url" id="webhook" name="webhook" required>
+    <input type="url" id="webhook" name="webhook" required><br>
 
     <button id="generateBtn">Generate Script</button>
-  </form>
+    <button id="copyBtn">Copy to Clipboard</button>
 
-  <div id="status"></div>
+    <textarea id="output" readonly></textarea>
 
-  <script src="script.js"></script>
+    <footer>
+        <p>Moontech Invite: <a href="https://discord.gg/RsMKm4ZWGd">Join Us</a></p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
